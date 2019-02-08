@@ -24,5 +24,7 @@ TOPICS COVERED
 * Foreach loops
 * Concatenation
 * Functions
+* Sanitizing strings
+* Escaping HTML output
 
 
