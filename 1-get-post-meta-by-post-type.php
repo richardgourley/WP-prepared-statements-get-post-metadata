@@ -4,12 +4,19 @@ In this example, we retrieve all posts with the post type 'services_offered'
 We use get_post_meta() to retrieve the meta data we want.
 */
 
-function get_metadata_by_post_type(){
-    global $wpdb;
+//Variable from the user selecting a custom post type - button clicked, drop down menu etc.
+$post_type = "services_offered";
+
+function get_metadata_by_post_type($post_type){
+    //Sanitized post name string before entering into SQL query.
+    $post_type_sanitized = filter_var($post_type, FILTER_SANITIZE_STRING);
+
     $output_string = "";
+    global $wpdb;
+    
     $stmt = $wpdb->prepare(
         "SELECT * FROM wp_posts WHERE post_type = %s",
-        'services_offered'
+        $post_type
     );
     //Returns array of objects from SQL statement.
     $results = $wpdb->get_results($stmt);
