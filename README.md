@@ -20,11 +20,15 @@ TOPICS COVERED
 * WPDB prepare function.
 * WPDB get results function
 * WP get post meta function
-* Associative arrays
-* Foreach loops
-* Concatenation
-* Functions
+* WPDB get row function.
 * Sanitizing strings
 * Escaping HTML output
+
+GENERAL SKILLS
+* Associative arrays
+* For each loops
+* Concatenation
+* Functions
+
 
 
