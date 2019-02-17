@@ -1,40 +1,35 @@
 <?php
+$post_type = "services_offered"; //Example variable from user input.
+
 /*
-In this example, we retrieve all posts with the post type 'services_offered'
-We use get_post_meta() to retrieve the meta data we want.
+* Loop through posts for a given post type, return an HTML string with details for each post.
+* 
+* @ param $post_type is any selected post type to be looped.
+* @ return string: a string containing HTML.
+* 
+* NOTE: %s signifies a string in prepared statements.
+* NOTE: You can use %d for integers, %f for floats in your prepared statements.
 */
-
-//Variable from the user selecting a custom post type - button clicked, drop down menu etc.
-$post_type = "services_offered";
-
 function get_metadata_by_post_type($post_type){
-    //Sanitized post name string before entering into SQL query.
-    $post_type_sanitized = filter_var($post_type, FILTER_SANITIZE_STRING);
+    $post_type_sanitized = filter_var($post_type, FILTER_SANITIZE_STRING); //Sanitize input parameter.
 
     $output_string = "";
     global $wpdb;
     
     $stmt = $wpdb->prepare(
-        "SELECT * FROM wp_posts WHERE post_type = %s",
-        $post_type
+        "SELECT * FROM wp_posts WHERE post_type = %s", 
+        $post_type_sanitized
     );
-    //Returns array of objects from SQL statement.
-    $results = $wpdb->get_results($stmt);
-    foreach($results as $entry){
-        //Escape all output from the database with htmlspecialchars
-        //Here we print the POST TITLE for each result from the query
-        $output_string .= "<h1>" . htmlspecialchars($entry->post_title) . "</h1>";
-        //Get post meta allows us to get specific post meta by POST ID and META KEY.
-        //In the parameters for get_post_meta, TRUE returns a single value, FALSE returns an array.
-        $output_string .= "<p>PRICES FROM: $";
-        $output_string .=  htmlspecialchars(get_post_meta($entry->ID, 'price_from', true)) . "</p>";
-        $output_string .= "<p>" . htmlspecialchars(get_post_meta($entry->ID, 'our_promise', true)) . "</p>";
+    
+    $results = $wpdb->get_results($stmt); //Returns array of objects
 
+    foreach($results as $entry){
+        $output_string .= "<h1>" . htmlspecialchars($entry->post_title) . "</h1>"; //Escape all output 
+        $output_string .= "<p>PRICES FROM: $";
+        //TRUE parameter in get_post_meta() means you expect more than 1 result.
+        $output_string .=  htmlspecialchars(get_post_meta($entry->ID, 'price_from', true)) . "</p>"; 
+        $output_string .= "<p>" . htmlspecialchars(get_post_meta($entry->ID, 'our_promise', true)) . "</p>";
     }
     
     return $output_string;
 }
-
-/*
-NOTE: You can use %d or %f if you have an integer or float to pass in to your prepared statements using WPDB->prepare.
-*/
