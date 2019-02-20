@@ -25,7 +25,7 @@ function get_metadata_individual_post($post_name){
     $output_string .= "<h1>" . htmlspecialchars($result->post_title) . "</h1>"; //Escape all output 
     
     $output_string .= "<p>PRICES FROM: $";
-    //TRUE parameter in get_post_meta() means you expect more than 1 result.
+    //TRUE parameter in get_post_meta() means you expect a single result.
     $output_string .=  htmlspecialchars(get_post_meta($result->ID, 'price_from', true)) . "</p>";
     $output_string .= "<p>" . htmlspecialchars(get_post_meta($result->ID, 'our_promise', true)) . "</p>";
 

@@ -26,7 +26,7 @@ function get_metadata_by_post_type($post_type){
     foreach($results as $entry){
         $output_string .= "<h1>" . htmlspecialchars($entry->post_title) . "</h1>"; //Escape all output 
         $output_string .= "<p>PRICES FROM: $";
-        //TRUE parameter in get_post_meta() means you expect more than 1 result.
+        //TRUE parameter in get_post_meta() means you expect a single result.
         $output_string .=  htmlspecialchars(get_post_meta($entry->ID, 'price_from', true)) . "</p>"; 
         $output_string .= "<p>" . htmlspecialchars(get_post_meta($entry->ID, 'our_promise', true)) . "</p>";
     }
