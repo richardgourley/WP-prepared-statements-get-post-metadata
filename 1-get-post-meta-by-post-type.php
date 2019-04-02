@@ -1,4 +1,13 @@
 <?php
+/*
+* PREPARED STATEMENTS
+* WP_QUERY adn other API functions are usually enough in WP development.
+* Use $wpdb when you needto create more advanced queries often using multiple tables with joins.
+*/
+
+
+/*
+*/
 
 /*
 * Search for posts for a given type, return an HTML string with details for each post.
