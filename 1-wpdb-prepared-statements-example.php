@@ -1,7 +1,7 @@
 <?php
 /*
 * PREPARED STATEMENTS
-* WP_QUERY adn other API functions are usually enough in WP development.
+* WP_QUERY and other API functions are usually enough in WP development.
 * Use $wpdb when you needto create more advanced queries often using multiple tables with joins.
 */
 
